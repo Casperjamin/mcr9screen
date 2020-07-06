@@ -25,6 +25,7 @@ def check_presence_fastq(SAMPLES):
 def define_input(inputdir):
     inputdir = get_absolute_path(inputdir)
     # check if valid
+    SAMPLES = glob.glob(f"{inputdir}/*/*fastq*")
     check_presence_fastq(SAMPLES)
     samplesdict = {"SAMPLES":{}}
     for i in SAMPLES:
