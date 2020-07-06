@@ -1,4 +1,4 @@
-SAMPLES 'samples/samples.yaml'
+SAMPLES =  'samples/samples.yaml'
 
 CASETTE  = 'sequences/references.fasta'
 rule build_database:
