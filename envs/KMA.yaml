@@ -1,0 +1,6 @@
+name: KMA
+channels:
+  - bioconda
+dependencies:
+  - KMA
+
