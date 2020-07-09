@@ -1,11 +1,13 @@
+from scripts.summary import KmaSum
+
 configfile: 'samples/samples.yaml'
 SAMPLES = config['SAMPLES']
 CASETTE  = 'sequences/references.fasta'
-print(SAMPLES)
 
 rule all:
     input:
-        expand("output/{sample}/kma_alignment/KMA.res", sample = SAMPLES)
+        expand("output/{sample}/kma_alignment/KMA.res", sample = SAMPLES),
+        "output/summary/kmasum.tsv"
 
 
 rule build_database:
@@ -41,3 +43,11 @@ rule kma_alignment:
     shell:
         "kma -ipe {input.forward} {input.reverse} -o {params.output} -t_db {params.reference}"
 
+
+rule summarize_kma:
+    input:
+        expand("output/{sample}/kma_alignment/KMA.res", sample = SAMPLES)
+    output:
+        "output/summary/kmasum.tsv"
+    run:
+        KmaSum(list(input), str(output))
