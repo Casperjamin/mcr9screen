@@ -1,6 +1,13 @@
-SAMPLES =  'samples/samples.yaml'
-
+configfile: 'samples/samples.yaml'
+SAMPLES = config['SAMPLES']
 CASETTE  = 'sequences/references.fasta'
+print(SAMPLES)
+
+rule all:
+    input:
+        expand("output/{sample}/kma_alignment/KMA.res", sample = SAMPLES)
+
+
 rule build_database:
     input:
         CASETTE
