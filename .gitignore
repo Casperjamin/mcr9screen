@@ -2,3 +2,6 @@
 output/
 samples/
 ref/
+
+*pyc
+__pycache__/*
