@@ -6,7 +6,7 @@ CASETTE  = 'sequences/references.fasta'
 
 rule all:
     input:
-        expand("output/{sample}/kma_alignment/KMA.res", sample = SAMPLES),
+        expand("output/sample/{sample}/kma_alignment/KMA.res", sample = SAMPLES),
         "output/summary/kmasum.tsv"
 
 
@@ -32,12 +32,12 @@ rule kma_alignment:
         reference = "ref/kma_database/reference.comp.b"
     params:
         reference = "ref/kma_database/reference",
-        output = "output/{sample}/kma_alignment/KMA"
+        output = "output/sample/{sample}/kma_alignment/KMA"
     output:
-        aln = "output/{sample}/kma_alignment/KMA.aln",
-        frag = "output/{sample}/kma_alignment/KMA.frag.gz",
-        fsa = "output/{sample}/kma_alignment/KMA.fsa",
-        res ="output/{sample}/kma_alignment/KMA.res",
+        aln = "output/sample/{sample}/kma_alignment/KMA.aln",
+        frag = "output/sample/{sample}/kma_alignment/KMA.frag.gz",
+        fsa = "output/sample/{sample}/kma_alignment/KMA.fsa",
+        res ="output/sample/{sample}/kma_alignment/KMA.res",
     conda:
         "envs/KMA.yaml"
     shell:
@@ -46,7 +46,7 @@ rule kma_alignment:
 
 rule summarize_kma:
     input:
-        expand("output/{sample}/kma_alignment/KMA.res", sample = SAMPLES)
+        expand("output/sample/{sample}/kma_alignment/KMA.res", sample = SAMPLES)
     output:
         "output/summary/kmasum.tsv"
     run:
